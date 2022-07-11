@@ -9,8 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import net.newfrom.nfcommonkt.R
-import net.newfrom.nfcommonkt.utils.Constants
+import net.common.commonlib.utils.Constants
 import java.lang.Exception
 
 abstract class BaseFragment : Fragment() {

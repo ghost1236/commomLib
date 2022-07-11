@@ -1,7 +1,7 @@
 package net.common.commonlib
 
 import android.os.Bundle
-import net.common.commonlib.extension.view.BaseTitlebar
+import net.common.commonlib.view.BaseTitlebar
 
 abstract class TitlebarActivity : BaseActivity() {
 

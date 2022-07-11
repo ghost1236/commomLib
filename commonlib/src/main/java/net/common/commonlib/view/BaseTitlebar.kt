@@ -5,7 +5,7 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
-import net.newfrom.nfcommonkt.R
+import net.common.commonlib.R
 
 abstract class BaseTitlebar @JvmOverloads constructor(
     context: Context,

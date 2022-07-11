@@ -9,7 +9,7 @@ import android.os.Build
 import android.widget.RemoteViews
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
-import net.newfrom.nfcommonkt.R
+import net.common.commonlib.R
 
 object NotificationUtils {
 
