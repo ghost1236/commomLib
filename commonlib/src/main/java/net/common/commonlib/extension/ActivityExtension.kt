@@ -4,7 +4,7 @@ import android.app.Activity
 import android.os.Build
 import android.provider.Settings
 import android.widget.Toast
-import net.common.commonlib.extension.utils.Prefs
+import net.common.commonlib.utils.Prefs
 import java.text.SimpleDateFormat
 import java.util.*
 
