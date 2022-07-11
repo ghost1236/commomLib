@@ -5,6 +5,28 @@ plugins {
     id 'maven-publish'
 }
 
+afterEvaluate {
+    publishing{
+        publications{
+            release(MavenPublication){
+                from components.release
+                groupId = 'net.common.commonlib'
+                artifactId = 'commonlib'
+                version = '1.0.0'
+            }
+
+            debug(MavenPublication) {
+                // Applies the component for the debug build variant.
+                from components.debug
+                groupId = 'net.common.commonlib'
+                artifactId = 'commonlib'
+                version = '1.0.0'
+            }
+        }
+    }
+}
+
+
 android {
     compileSdk 31
 
