@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="NfBaseTitlebar">
+        <attr name="titleText" format="string" />
+        <attr name="leftBtnShow">
+            <flag name="visiable" value="0" />
+            <flag name="invisiable" value="4" />
+            <flag name="gone" value="8" />
+        </attr>
+        <attr name="rightBtnShow">
+            <flag name="visiable" value="0" />
+            <flag name="invisiable" value="4" />
+            <flag name="gone" value="8" />
+        </attr>
+        <attr name="titleShow">
+            <flag name="visiable" value="0" />
+            <flag name="invisiable" value="4" />
+            <flag name="gone" value="8" />
+        </attr>
+        <attr name="leftImgBg" format="reference" />
+        <attr name="rightImgBg" format="reference" />
+        <attr name="titlebarBg" format="reference" />
+    </declare-styleable>
+</resources>
