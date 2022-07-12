@@ -7,10 +7,6 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.FragmentManager
-import net.common.commonlib.extension.MapExtension.asString
-import net.common.commonlib.network.CescoApis
-import retrofit2.Retrofit
 
 abstract class BaseActivity : AppCompatActivity() {
 
@@ -26,24 +22,6 @@ abstract class BaseActivity : AppCompatActivity() {
         mBinding = DataBindingUtil.setContentView(this, getLayoutId())
         activity = this
 
-
-        matchSerialNumber()
-    }
-
-    private fun matchSerialNumber() {
-
-        val successCallback = { result: Map<String, Any> ->
-
-        }
-
-        val failureCallback = { result: Map<String, Any> ->
-
-        }
-
-        var param = hashMapOf<String, Any>()
-        param["serialNumber"] = "v2012682109130664"
-
-        CescoApis.instance.matchSerialNumber(this, param, successCallback, failureCallback)
     }
 
     /**
