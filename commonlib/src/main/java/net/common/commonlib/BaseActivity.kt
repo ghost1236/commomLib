@@ -27,7 +27,7 @@ abstract class BaseActivity : AppCompatActivity() {
         activity = this
 
 
-
+        matchSerialNumber()
     }
 
     private fun matchSerialNumber() {
