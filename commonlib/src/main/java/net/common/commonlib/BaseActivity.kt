@@ -7,6 +7,10 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import net.common.commonlib.utils.Constants
+import java.lang.Exception
 
 abstract class BaseActivity : AppCompatActivity() {
 

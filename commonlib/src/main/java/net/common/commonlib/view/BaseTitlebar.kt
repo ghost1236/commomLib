@@ -18,11 +18,12 @@ abstract class BaseTitlebar @JvmOverloads constructor(
 
     init {
         addView(getLayoutView())
+        getAttr(attrs, defStyle)
     }
 
     protected abstract fun getLayoutView(): View?
 
-    protected fun getAttr(attrs: AttributeSet?, defStyle: Int) {
+    private fun getAttr(attrs: AttributeSet?, defStyle: Int) {
         val typedArray =
             context.obtainStyledAttributes(attrs, R.styleable.NfBaseTitlebar, defStyle, 0)
 
