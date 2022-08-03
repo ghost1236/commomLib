@@ -25,24 +25,24 @@ abstract class BaseTitlebar @JvmOverloads constructor(
 
     private fun getAttr(attrs: AttributeSet?, defStyle: Int) {
         val typedArray =
-            context.obtainStyledAttributes(attrs, R.styleable.NfBaseTitlebar, defStyle, 0)
+            context.obtainStyledAttributes(attrs, R.styleable.BaseTitlebar, defStyle, 0)
 
         val bgColor =
-            typedArray.getResourceId(R.styleable.NfBaseTitlebar_titlebarBg, R.color.color_4285f4)
+            typedArray.getResourceId(R.styleable.BaseTitlebar_titlebarBg, R.color.color_4285f4)
         setTitleBgColor(bgColor)
 
-        val titleStr = typedArray.getString(R.styleable.NfBaseTitlebar_titleText)
+        val titleStr = typedArray.getString(R.styleable.BaseTitlebar_titleText)
         titleStr?.let { setTitle(it) }
 
-        val bgLeftBtn = typedArray.getDrawable(R.styleable.NfBaseTitlebar_leftImgBg)
+        val bgLeftBtn = typedArray.getDrawable(R.styleable.BaseTitlebar_leftImgBg)
         bgLeftBtn?.let { setLeftBg(it) }
 
-        val bgRightBtn = typedArray.getDrawable(R.styleable.NfBaseTitlebar_rightImgBg)
+        val bgRightBtn = typedArray.getDrawable(R.styleable.BaseTitlebar_rightImgBg)
         bgRightBtn?.let { setRightBg(it) }
-        val leftVisibility = typedArray.getInt(R.styleable.NfBaseTitlebar_leftBtnShow, GONE)
+        val leftVisibility = typedArray.getInt(R.styleable.BaseTitlebar_leftBtnShow, GONE)
         setLeftBtnVisiable(leftVisibility)
 
-        val rightVisibility = typedArray.getInt(R.styleable.NfBaseTitlebar_rightBtnShow, GONE)
+        val rightVisibility = typedArray.getInt(R.styleable.BaseTitlebar_rightBtnShow, GONE)
         setRightBtnVisiable(rightVisibility)
     }
 
