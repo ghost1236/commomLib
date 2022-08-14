@@ -15,7 +15,7 @@ object JsonExtension {
             var key = iter.next()
             var value = get(key)
             if (get(key) is JSONObject) {
-                map.put(key, getString(key))
+                map.put(key, getJSONObject(key).toMap())
             } else if (get(key) is JSONArray) {
                 map.put(key, getJSONArray(key).toArrayList())
             } else {
