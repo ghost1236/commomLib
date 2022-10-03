@@ -37,4 +37,5 @@ abstract class BaseFragment : Fragment() {
 
     protected abstract fun getLayoutId() : Int
 
+
 }

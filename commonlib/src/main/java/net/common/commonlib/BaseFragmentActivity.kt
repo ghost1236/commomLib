@@ -78,7 +78,7 @@ abstract class BaseFragmentActivity : FragmentActivity() {
 
             ft.add(whereId, FMView, tag)
 
-            check(backstack) {
+            if (backstack) {
                 ft.addToBackStack(tag)
             }
 
