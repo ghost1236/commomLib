@@ -140,4 +140,10 @@ object Prefs {
         map = jsonStr?.let { JsonParser.getMapData(jsonStr) }
         return map
     }
+
+    fun clear(context: Context) {
+        var editor : SharedPreferences.Editor = get(context, Prefs.M_PRIVATE).edit()
+        editor.clear()
+        editor.commit()
+    }
 }
