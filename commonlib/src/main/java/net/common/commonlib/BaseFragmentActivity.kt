@@ -90,6 +90,43 @@ abstract class BaseFragmentActivity : FragmentActivity() {
         return result
     }
 
+    fun replaceFragment(act: FragmentActivity, whereId: Int, tag: String, backstack: Boolean, anim: Int) : Boolean {
+        return replaceFragment(act, whereId, tag, bundle = null, backstack, anim)
+    }
+
+    fun replaceFragment(act: FragmentActivity, whereId: Int, tag: String, bundle: Bundle?, backstack: Boolean, anim: Int) : Boolean {
+        var result = true
+
+        try {
+            val manager = act.supportFragmentManager
+            val ft = manager.beginTransaction()
+
+            if (anim == Constants.ANIM_FRAGMENT_UP) {
+                ft.setCustomAnimations(R.anim.slide_up, R.anim.slide_down)
+            } else if (anim == Constants.ANIM_FRAGMENT_IN_LEFT) {
+                ft.setCustomAnimations(R.anim.slide_left, R.anim.slide_down)
+            }
+
+            val FMView = getFragmentView(tag)
+
+            bundle?.let {
+                FMView.arguments = bundle
+            }
+
+            ft.replace(whereId, FMView, tag)
+
+            if (backstack) {
+                ft.addToBackStack(tag)
+            }
+
+            ft.commitAllowingStateLoss()
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return result
+    }
+
     fun RemoveViewTag(act: FragmentActivity, viewTag: String, anim: Int) : Boolean {
         return RemoveViewTag(act, arrayOf(viewTag), anim)
     }
