@@ -12,7 +12,7 @@ afterEvaluate {
                 from components.release
                 groupId = 'net.common.commonlib'
                 artifactId = 'commonlib'
-                version = '1.0.8'
+                version = '1.0.9'
             }
 
             debug(MavenPublication) {
@@ -20,7 +20,7 @@ afterEvaluate {
                 from components.debug
                 groupId = 'net.common.commonlib'
                 artifactId = 'commonlib'
-                version = '1.0.8'
+                version = '1.0.9'
             }
         }
     }
@@ -28,13 +28,13 @@ afterEvaluate {
 
 
 android {
-    compileSdk 31
+    compileSdk 33
 
     defaultConfig {
         minSdk 21
-        targetSdk 31
+        targetSdk 33
         versionCode 1
-        versionName "1.0.8"
+        versionName "1.0.9"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
