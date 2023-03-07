@@ -5,7 +5,7 @@ import android.util.Log
 
 object LoggerExtension {
     var logStaus = false
-    var baseTag = "NfLogger"
+    var baseTag = "Logger"
 
     var Activity.logTag : String
         get() = baseTag
