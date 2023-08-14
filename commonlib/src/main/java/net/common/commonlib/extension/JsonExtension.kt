@@ -7,6 +7,8 @@ import org.json.JSONObject
 
 object JsonExtension {
 
+    var arrayKeys = arrayListOf<String>("healthIssue", "ingredientsList" , "feedfunctionList")
+
     fun JSONObject.toMap() : Map<String, Any> {
         var map = HashMap<String, Any>()
 
@@ -14,12 +16,16 @@ object JsonExtension {
         while (iter.hasNext()) {
             var key = iter.next()
             var value = get(key)
-            if (get(key) is JSONObject) {
-                map.put(key, getJSONObject(key).toMap())
-            } else if (get(key) is JSONArray) {
-                map.put(key, getJSONArray(key).toArrayList())
+            if (value is JSONObject) {
+                map[key] = getJSONObject(key).toMap()
+            } else if (value is JSONArray) {
+                if (arrayKeys.contains(key)) {
+                    map[key] = getJSONArray(key).toStringArray()
+                } else {
+                    map[key] = getJSONArray(key).toArrayList()
+                }
             } else {
-                map.put(key, getString(key))
+                map[key] = getString(key)
             }
         }
         return map
@@ -28,7 +34,7 @@ object JsonExtension {
     fun JSONArray.toArrayList() : ArrayList<Map<String, Any>> {
         var list = ArrayList<Map<String, Any>>()
 
-        for (i in 0..length()) {
+        for (i in 0 until length()) {
             try {
                 var jsonObject = getJSONObject(i)
                 list.add(jsonObject.toString().asHashMap()?.let { it } ?: emptyMap())
@@ -39,4 +45,17 @@ object JsonExtension {
         return list
     }
 
+    fun JSONArray.toStringArray() : ArrayList<String> {
+        var list = ArrayList<String>()
+
+        for (i in 0 until length()) {
+            try {
+                var jsonObject = getString(i)
+                list.add(jsonObject.toString())
+            } catch (e : JSONException) {
+                e.printStackTrace()
+            }
+        }
+        return list
+    }
 }

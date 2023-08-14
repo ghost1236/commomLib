@@ -6,6 +6,7 @@ import net.common.commonlib.extension.ByteArrayExtension.toAesDecode
 import net.common.commonlib.extension.ByteArrayExtension.toAesEncode
 import net.common.commonlib.extension.JsonExtension.toArrayList
 import net.common.commonlib.extension.JsonExtension.toMap
+import net.common.commonlib.extension.JsonExtension.toStringArray
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -134,9 +135,17 @@ object StringExtension {
             while (iKeys.hasNext()) {
                 var key = iKeys.next()
                 when {
-                    jobj.get(key) is JSONObject -> map.put(key, jobj.getJSONObject(key).toMap())
-                    jobj.get(key) is JSONArray -> map.put(key, jobj.getJSONArray(key).toArrayList())
-                    else -> map.put(key, jobj.get(key))
+                    jobj.get(key) is JSONObject -> map[key] =  jobj.getJSONObject(key).toMap()
+                    jobj.get(key) is JSONArray -> {
+                        if (JsonExtension.arrayKeys.contains(key)) {
+                            map[key] = jobj.getJSONArray(key).toStringArray()
+                        } else {
+                            map[key] = jobj.getJSONArray(key).toArrayList()
+                        }
+                    }
+                    else -> {
+                        map[key] = jobj.get(key)
+                    }
                 }
             }
             map
