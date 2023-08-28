@@ -7,7 +7,7 @@ import org.json.JSONObject
 
 object JsonExtension {
 
-    var arrayKeys = arrayListOf<String>("healthIssue", "ingredientsList" , "feedfunctionList")
+    var arrayKeys = arrayListOf<String>("healthIssue", "ingredientsList" , "feedfunctionList", "feedHealthissueList", "feedingGuideList")
 
     fun JSONObject.toMap() : Map<String, Any> {
         var map = HashMap<String, Any>()
