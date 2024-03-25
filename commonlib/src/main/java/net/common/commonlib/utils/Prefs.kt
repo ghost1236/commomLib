@@ -120,7 +120,7 @@ object Prefs {
     }
 
     fun putMap(context: Context, key : String, strData : Map<String, Any>) {
-        putMap(context, key, strData)
+        putMap(context, M_PRIVATE, key, strData)
     }
 
     fun putMap(context: Context, mainKey: String, subKey: String, strData: Map<String, Any>) {
@@ -129,8 +129,8 @@ object Prefs {
         putString(context, mainKey, subKey, jsonStr)
     }
 
-    fun getMap(context: Context, key: String) {
-        getMap(context, key)
+    fun getMap(context: Context, key: String) : Map<String, Any>? {
+        return getMap(context, M_PRIVATE, key)
     }
 
     fun getMap(context: Context, mainKey: String, subKey: String) : Map<String, Any>? {
