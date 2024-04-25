@@ -146,4 +146,16 @@ object Prefs {
         editor.clear()
         editor.commit()
     }
+
+    fun remove(context: Context, subKey: String) {
+        var editor : SharedPreferences.Editor = get(context, Prefs.M_PRIVATE).edit()
+        editor.remove(subKey)
+        editor.commit()
+    }
+
+    fun remove(context: Context, mainKey: String, subKey: String) {
+        var editor : SharedPreferences.Editor = get(context, mainKey).edit()
+        editor.remove(subKey)
+        editor.commit()
+    }
 }
