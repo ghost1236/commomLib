@@ -53,22 +53,18 @@ abstract class BaseFragmentActivity : FragmentActivity() {
         overridePendingTransition(enterAnyId ?: 0, exitAnyId ?: 0)
     }
 
-    fun AddFragment(act: FragmentActivity, whereId: Int, tag: String, backstack: Boolean, anim: Int) : Boolean {
-        return AddFragment(act, whereId, tag, bundle = null, backstack, anim)
+    fun AddFragment(act: FragmentActivity, whereId: Int, tag: String, backstack: Boolean, enterAnyId : Int? = 0, exitAnyId : Int? = 0) : Boolean {
+        return AddFragment(act, whereId, tag, bundle = null, backstack, enterAnyId ?: 0, exitAnyId ?: 0)
     }
 
-    fun AddFragment(act: FragmentActivity, whereId: Int, tag: String, bundle: Bundle?, backstack: Boolean, anim: Int) : Boolean {
+    fun AddFragment(act: FragmentActivity, whereId: Int, tag: String, bundle: Bundle?, backstack: Boolean, enterAnyId : Int? = 0, exitAnyId : Int? = 0) : Boolean {
         var result = true
 
         try {
             val manager = act.supportFragmentManager
             val ft = manager.beginTransaction()
 
-            if (anim == Constants.ANIM_FRAGMENT_UP) {
-                ft.setCustomAnimations(R.anim.slide_up, R.anim.ani_none)
-            } else if (anim == Constants.ANIM_FRAGMENT_IN_LEFT) {
-                ft.setCustomAnimations(R.anim.slide_left, R.anim.ani_none)
-            }
+            ft.setCustomAnimations(enterAnyId ?: 0, exitAnyId ?: 0)
 
             val FMView = getFragmentView(tag)
 
@@ -90,22 +86,18 @@ abstract class BaseFragmentActivity : FragmentActivity() {
         return result
     }
 
-    fun replaceFragment(act: FragmentActivity, whereId: Int, tag: String, backstack: Boolean, anim: Int) : Boolean {
-        return replaceFragment(act, whereId, tag, bundle = null, backstack, anim)
+    fun replaceFragment(act: FragmentActivity, whereId: Int, tag: String, backstack: Boolean, enterAnyId : Int? = 0, exitAnyId : Int? = 0) : Boolean {
+        return replaceFragment(act, whereId, tag, bundle = null, backstack, enterAnyId ?: 0, exitAnyId ?: 0)
     }
 
-    fun replaceFragment(act: FragmentActivity, whereId: Int, tag: String, bundle: Bundle?, backstack: Boolean, anim: Int) : Boolean {
+    fun replaceFragment(act: FragmentActivity, whereId: Int, tag: String, bundle: Bundle?, backstack: Boolean, enterAnyId : Int? = 0, exitAnyId : Int? = 0) : Boolean {
         var result = true
 
         try {
             val manager = act.supportFragmentManager
             val ft = manager.beginTransaction()
 
-            if (anim == Constants.ANIM_FRAGMENT_UP) {
-                ft.setCustomAnimations(R.anim.ani_none, R.anim.slide_down)
-            } else if (anim == Constants.ANIM_FRAGMENT_IN_LEFT) {
-                ft.setCustomAnimations(R.anim.slide_left, R.anim.ani_none)
-            }
+            ft.setCustomAnimations(enterAnyId ?: 0, exitAnyId ?: 0)
 
             val FMView = getFragmentView(tag)
 
@@ -127,22 +119,18 @@ abstract class BaseFragmentActivity : FragmentActivity() {
         return result
     }
 
-    fun RemoveViewTag(act: FragmentActivity, viewTag: String, anim: Int) : Boolean {
-        return RemoveViewTag(act, arrayOf(viewTag), anim)
+    fun RemoveViewTag(act: FragmentActivity, viewTag: String, enterAnyId : Int? = 0, exitAnyId : Int? = 0) : Boolean {
+        return RemoveViewTag(act, arrayOf(viewTag), enterAnyId ?: 0, exitAnyId ?: 0)
     }
 
-    fun RemoveViewTag(act: FragmentActivity, viewTags: Array<String>, anim: Int) : Boolean {
+    fun RemoveViewTag(act: FragmentActivity, viewTags: Array<String>, enterAnyId : Int? = 0, exitAnyId : Int? = 0) : Boolean {
         var isRemove = false
 
         try {
             val manager = act.supportFragmentManager
             val ft = manager.beginTransaction()
 
-            if (anim == Constants.ANIM_FRAGMENT_UP) {
-                ft.setCustomAnimations(R.anim.ani_none, R.anim.slide_down)
-            } else if (anim == Constants.ANIM_FRAGMENT_IN_LEFT) {
-                ft.setCustomAnimations(R.anim.ani_none, R.anim.slide_right)
-            }
+            ft.setCustomAnimations(enterAnyId ?: 0, exitAnyId ?: 0)
 
             for (viewTag in viewTags) {
                 val pageView: Fragment? = manager.findFragmentByTag(viewTag)
