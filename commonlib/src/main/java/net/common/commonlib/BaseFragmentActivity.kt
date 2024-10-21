@@ -104,7 +104,7 @@ abstract class BaseFragmentActivity : FragmentActivity() {
             if (anim == Constants.ANIM_FRAGMENT_UP) {
                 ft.setCustomAnimations(R.anim.ani_none, R.anim.slide_down)
             } else if (anim == Constants.ANIM_FRAGMENT_IN_LEFT) {
-                ft.setCustomAnimations(R.anim.ani_none, R.anim.slide_right)
+                ft.setCustomAnimations(R.anim.slide_left, R.anim.ani_none)
             }
 
             val FMView = getFragmentView(tag)
@@ -139,9 +139,9 @@ abstract class BaseFragmentActivity : FragmentActivity() {
             val ft = manager.beginTransaction()
 
             if (anim == Constants.ANIM_FRAGMENT_UP) {
-                ft.setCustomAnimations(R.anim.slide_up, R.anim.slide_down)
+                ft.setCustomAnimations(R.anim.ani_none, R.anim.slide_down)
             } else if (anim == Constants.ANIM_FRAGMENT_IN_LEFT) {
-                ft.setCustomAnimations(R.anim.slide_left, R.anim.slide_down)
+                ft.setCustomAnimations(R.anim.ani_none, R.anim.slide_right)
             }
 
             for (viewTag in viewTags) {
