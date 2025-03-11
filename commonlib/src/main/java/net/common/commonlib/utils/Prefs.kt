@@ -3,6 +3,8 @@ package net.common.commonlib.utils
 import android.content.Context
 import android.content.SharedPreferences
 import net.common.commonlib.utils.JsonParser
+import org.json.JSONArray
+import org.json.JSONException
 import org.json.JSONObject
 
 object Prefs {
@@ -16,6 +18,7 @@ object Prefs {
         return context.getSharedPreferences(mainKey, Context.MODE_PRIVATE)
     }
 
+    /** StringSet **/
     fun putStringSet(context: Context, key : String, defValue : MutableSet<String>) {
         putStringSet(context, M_PRIVATE, key, defValue)
     }
@@ -33,13 +36,15 @@ object Prefs {
     fun getStringSet(context: Context, mainKey: String, subKey: String, defValue: Set<String>) : MutableSet<String>? {
         return get(context, mainKey).getStringSet(subKey, defValue)
     }
+    /** StringSet **/
 
+    /** Boolean **/
     fun putBoolean(context: Context, key : String, defValue: Boolean) {
         putBoolean(context, M_PRIVATE, key, defValue)
     }
 
     fun putBoolean(context: Context, mainKey: String, subKey: String, defValue: Boolean) {
-        var editor : SharedPreferences.Editor = get(context, mainKey).edit()
+        val editor : SharedPreferences.Editor = get(context, mainKey).edit()
         editor.putBoolean(subKey, defValue)
         editor.commit()
     }
@@ -51,13 +56,15 @@ object Prefs {
     fun getBoolean(context: Context, mainKey: String, subKey: String, defValue: Boolean) : Boolean {
         return get(context, mainKey).getBoolean(subKey, defValue)
     }
+    /** Boolean **/
 
+    /** String **/
     fun putString(context: Context, key: String, defValue: String) {
         putString(context, M_PRIVATE, key, defValue)
     }
 
     fun putString(context: Context, mainKey: String, subKey: String, defValue: String) {
-        var editor : SharedPreferences.Editor = get(context, mainKey).edit()
+        val editor : SharedPreferences.Editor = get(context, mainKey).edit()
         if (defValue.equals("")) {
             editor.putString(subKey, "")
         } else {
@@ -74,13 +81,15 @@ object Prefs {
         val str: String? = get(context, mainKey).getString(subKey, defValue)
         return str?.let { it } ?: ""
     }
+    /** String **/
 
+    /** Long **/
     fun putLong(context: Context, key : String, defValue: Long) {
         putLong(context, key, defValue)
     }
 
     fun putLong(context: Context, mainKey: String, subKey: String, defValue: Long) {
-        var editor : SharedPreferences.Editor = get(context, mainKey).edit()
+        val editor : SharedPreferences.Editor = get(context, mainKey).edit()
         editor.putLong(subKey, defValue)
         editor.commit()
     }
@@ -96,13 +105,15 @@ object Prefs {
         defLong = get(context, mainKey).getLong(subKey, defValue)
         return defLong
     }
+    /** Long **/
 
+    /** Int **/
     fun putInt(context: Context, key: String, defValue: Int) {
         putInt(context, M_PRIVATE, key, defValue)
     }
 
     fun putInt(context: Context, mainKey: String, subKey: String, defValue: Int) {
-        var editor : SharedPreferences.Editor = get(context, mainKey).edit()
+        val editor : SharedPreferences.Editor = get(context, mainKey).edit()
         editor.putInt(subKey, defValue)
         editor.commit()
     }
@@ -115,17 +126,19 @@ object Prefs {
         val defInt : Int
         defInt = defValue
 
-        var str = get(context, mainKey).getInt(subKey, defValue)
+        val str = get(context, mainKey).getInt(subKey, defValue)
         return str
     }
+    /** Int **/
 
+    /** Map<String, Any> **/
     fun putMap(context: Context, key : String, strData : Map<String, Any>) {
         putMap(context, M_PRIVATE, key, strData)
     }
 
     fun putMap(context: Context, mainKey: String, subKey: String, strData: Map<String, Any>) {
-        var jsonObjects : JSONObject = JSONObject(strData)
-        var jsonStr = jsonObjects.toString()
+        val jsonObjects : JSONObject = JSONObject(strData)
+        val jsonStr = jsonObjects.toString()
         putString(context, mainKey, subKey, jsonStr)
     }
 
@@ -134,12 +147,46 @@ object Prefs {
     }
 
     fun getMap(context: Context, mainKey: String, subKey: String) : Map<String, Any>? {
-        var jsonStr = getString(context, mainKey, subKey, "")
+        val jsonStr = getString(context, mainKey, subKey, "")
 
         var map : Map<String, Any>? = HashMap<String, Any>()
         map = jsonStr?.let { JsonParser.getMapData(jsonStr) }
         return map
     }
+    /** Map<String, Any> **/
+
+    /** ArrayList<Map<String, Any>> **/
+    fun putArrayList(context: Context, key: String, strData: ArrayList<Map<String, Any>>) {
+        putArrayList(context, M_PRIVATE, key, strData)
+    }
+
+    fun putArrayList(context: Context, mainKey: String, subKey: String, strData: ArrayList<Map<String, Any>>) {
+        val jsonArray = JSONArray()
+        for (map in strData) {
+            val jsonObject = JSONObject(map)
+            jsonArray.put(jsonObject)
+        }
+        val jsonStr = jsonArray.toString()
+        putString(context, mainKey, subKey, jsonStr)
+    }
+
+    fun getArrayList(context: Context, key: String) : ArrayList<Map<String, Any>>? {
+        return getArrayList(context, M_PRIVATE, key)
+    }
+
+    fun getArrayList(context: Context, mainKey: String, subKey: String) : ArrayList<Map<String, Any>>? {
+        val jsonStr = getString(context, mainKey, subKey, "")
+        if (jsonStr.isEmpty()) return null
+
+        return try {
+            val jsonArray = JSONArray(jsonStr)
+            JsonParser.parse(jsonArray)
+        } catch (e: JSONException) {
+            e.printStackTrace()
+            null
+        }
+    }
+    /** ArrayList<Map<String, Any>> **/
 
     fun clear(context: Context) {
         var editor : SharedPreferences.Editor = get(context, Prefs.M_PRIVATE).edit()
