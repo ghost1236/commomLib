@@ -3,7 +3,7 @@ plugins {
     // smWebview/webviewlib 와 동일 스택으로 통일 (AGP 8.6 / Kotlin 1.9.24)
     id 'com.android.application' version '8.6.0' apply false
     id 'com.android.library' version '8.6.0' apply false
-    id 'org.jetbrains.kotlin.android' version '1.9.24' apply false
+    id 'org.jetbrains.kotlin.android' version '2.1.20' apply false
 }
 
 task clean(type: Delete) {
