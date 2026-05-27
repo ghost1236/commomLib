@@ -54,9 +54,9 @@ afterEvaluate {
                 from components.release
                 groupId = 'net.common.commonlib'
                 artifactId = 'commonlib'
-                // 최신 스택(AGP8/SDK35) 변경은 소비자 compileSdk 요구가 바뀌는 breaking change → 메이저 2.0.0
-                // (기존 앱은 1.0.16 태그를 계속 사용하므로 영향 없음)
-                version = '2.0.0'
+                // 2.0.0(Kotlin 1.9.24)은 이미 배포됨 → Kotlin 2.1.20 통일 반영을 위해 2.0.1 로 올림
+                // (jitpack 태그는 불변이라 같은 2.0.0 재사용 시 옛 빌드가 캐시됨)
+                version = '2.0.1'
             }
         }
     }
