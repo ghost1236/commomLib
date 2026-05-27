@@ -67,7 +67,9 @@ dependencies {
     // androidx 는 compileSdk 35 호환 버전으로 상향(webviewlib 와 동일)
     implementation 'androidx.core:core-ktx:1.13.1'
     implementation 'androidx.appcompat:appcompat:1.7.0'
-    implementation 'com.google.android.material:material:1.12.0'
+    // material 자체는 미사용이라 제거. 단 BaseTitlebar 가 쓰는 ConstraintLayout 은
+    // 기존에 material 의 transitive 로 들어오던 것이라, 명시적으로 추가한다.
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
