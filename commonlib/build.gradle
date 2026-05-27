@@ -54,9 +54,9 @@ afterEvaluate {
                 from components.release
                 groupId = 'net.common.commonlib'
                 artifactId = 'commonlib'
-                // 2.0.0(Kotlin 1.9.24)은 이미 배포됨 → Kotlin 2.1.20 통일 반영을 위해 2.0.1 로 올림
-                // (jitpack 태그는 불변이라 같은 2.0.0 재사용 시 옛 빌드가 캐시됨)
-                version = '2.0.1'
+                // 2.0.1 까지 배포됨 → 미사용 의존성(retrofit/okhttp/gson) 제거 반영분이 2.0.2
+                // (jitpack 태그 불변: 변경 시 항상 +1)
+                version = '2.0.2'
             }
         }
     }
@@ -72,15 +72,12 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.3'
+    // 네트워크(retrofit/okhttp)·gson 은 commonlib 에서 사용하지 않아 제거함.
+    // 네트워크가 필요한 앱은 각자 의존성을 직접 추가할 것.
 
-    // Glide 는 Kotlin 1.9 kapt 와의 안정성을 위해 최신(4.16.0)으로 상향, compiler 는 kapt 로 처리
+    // Glide 는 ImageViewExtension 에서 사용. compiler 는 kapt 로 처리.
     implementation 'com.github.bumptech.glide:glide:4.16.0'
     kapt 'com.github.bumptech.glide:compiler:4.16.0'
-
-    implementation 'com.google.code.gson:gson:2.10.1'
 }
 
 task deleteObjectJar(type: Delete) {
