@@ -1,63 +1,67 @@
 package net.common.commonlib.extension
 
-import android.app.Activity
 import android.util.Log
 
+/**
+ * 로그 확장 — receiver 를 [Any] 로 두어 Activity / Application / Fragment / ViewModel / Service 등
+ * **어디서든** 호출 가능. (기존 Activity 호출은 그대로 동작 — Activity 도 Any 의 하위라 하위호환)
+ *
+ * 본 함수들은 Activity 고유 기능을 쓰지 않고 [Log](static) + object 멤버([logStaus]/[baseTag])만
+ * 사용하므로 receiver 가 Activity 일 이유가 없다.
+ */
 object LoggerExtension {
     var logStaus = false
     var baseTag = "Logger"
 
-    var Activity.logTag : String
+    var Any.logTag: String
         get() = baseTag
         set(value) {
             baseTag = value
         }
 
-    var Activity.logPrint : Boolean
+    var Any.logPrint: Boolean
         get() = logStaus
         set(value) {
             logStaus = value
         }
 
-    fun Activity.logD(a: String) {
-        if (!logStaus)  return
+    fun Any.logD(a: String) {
+        if (!logStaus) return
         logD(baseTag, a)
     }
 
-    fun Activity.logD(tag: String, a: String) {
-        if (!logStaus)  return
-        if (tag == null) Log.d(baseTag, a) else Log.d(tag, a)
+    fun Any.logD(tag: String, a: String) {
+        if (!logStaus) return
+        Log.d(tag, a)
     }
 
-    fun Activity.logW(a: String) {
-        if (!logStaus)  return
+    fun Any.logW(a: String) {
+        if (!logStaus) return
         logW(baseTag, a)
     }
 
-    fun Activity.logW(tag: String, a: String) {
-        if (!logStaus)  return
-        if (tag == null) Log.w(baseTag, a) else Log.w(tag, a)
+    fun Any.logW(tag: String, a: String) {
+        if (!logStaus) return
+        Log.w(tag, a)
     }
 
-    fun Activity.logI(a: String) {
-        if (!logStaus)  return
+    fun Any.logI(a: String) {
+        if (!logStaus) return
         logI(baseTag, a)
     }
 
-    fun Activity.logI(tag: String, a: String) {
-        if (!logStaus)  return
-        if (tag == null) Log.i(baseTag, a) else Log.i(tag, a)
+    fun Any.logI(tag: String, a: String) {
+        if (!logStaus) return
+        Log.i(tag, a)
     }
 
-    fun Activity.logE(a: String) {
-        if (!logStaus)  return
+    fun Any.logE(a: String) {
+        if (!logStaus) return
         logE(baseTag, a)
     }
 
-    fun Activity.logE(tag: String, a: String) {
-        if (!logStaus)  return
-        if (tag == null) Log.e(baseTag, a) else Log.e(tag, a)
+    fun Any.logE(tag: String, a: String) {
+        if (!logStaus) return
+        Log.e(tag, a)
     }
-
 }
-
